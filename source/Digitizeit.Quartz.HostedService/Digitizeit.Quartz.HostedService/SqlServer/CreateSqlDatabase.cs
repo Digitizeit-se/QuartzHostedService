@@ -5,10 +5,11 @@ using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using Digitizeit.Quartz.HostedService.Interfaces;
 
 namespace Digitizeit.Quartz.HostedService.SqlServer
 {
-    public class CreateSqlDatabase
+    public class CreateSqlDatabase : ICreateDatabase
     {
         private readonly ILogger<CreateSqlDatabase> _logger;
 

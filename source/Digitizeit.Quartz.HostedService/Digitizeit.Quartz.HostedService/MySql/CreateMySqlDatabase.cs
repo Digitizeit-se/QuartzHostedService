@@ -5,10 +5,11 @@ using Microsoft.Extensions.Logging.Abstractions;
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using Digitizeit.Quartz.HostedService.Interfaces;
 
 namespace Digitizeit.Quartz.HostedService.MySql
 {
-    public class CreateMySqlDatabase
+    public class CreateMySqlDatabase : ICreateDatabase
     {
         private readonly ILogger<CreateMySqlDatabase> _logger;
 

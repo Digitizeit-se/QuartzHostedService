@@ -5,10 +5,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.IO;
+using Digitizeit.Quartz.HostedService.Interfaces;
 
 namespace Digitizeit.Quartz.HostedService.SqLite
 {
-    public class CreateSqLiteDatabase
+    public class CreateSqLiteDatabase : ICreateDatabase
     {
         private readonly ILogger<CreateSqLiteDatabase> _logger;
 

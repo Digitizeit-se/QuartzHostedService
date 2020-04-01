@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digitizeit.Quartz.HostedService", "Digitizeit.Quartz.HostedService\Digitizeit.Quartz.HostedService.csproj", "{EC4C785A-F2EA-4E64-A744-9614A2E0B6B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digitizeit.Quartz.HostedService.Test", "Digitizeit.Quartz.HostedService.Test\Digitizeit.Quartz.HostedService.Test.csproj", "{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC4C785A-F2EA-4E64-A744-9614A2E0B6B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC4C785A-F2EA-4E64-A744-9614A2E0B6B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC4C785A-F2EA-4E64-A744-9614A2E0B6B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC4C785A-F2EA-4E64-A744-9614A2E0B6B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFF96183-276A-4D94-BC57-639C2F381EB7}
+	EndGlobalSection
+EndGlobal

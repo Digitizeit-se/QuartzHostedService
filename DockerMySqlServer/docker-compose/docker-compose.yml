@@ -1,0 +1,21 @@
+version: "2.4"
+
+services:
+    mysql:
+      hostname: local-mysql
+      image: mysql:5.7
+      ports: 
+      - "3306:3306"
+      environment: 
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: somedb
+       MYSQL_USER: sa
+       MYSQL_PASSWORD: Secret123!%
+      networks: 
+        reporting:
+          ipv4_address: 172.16.240.4
+          aliases: 
+          - local-mysql
+networks:
+    reporting:
+     external: true

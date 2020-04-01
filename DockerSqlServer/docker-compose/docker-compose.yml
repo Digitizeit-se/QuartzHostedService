@@ -1,0 +1,21 @@
+version: "2.4"
+
+services:
+    mssql:
+      hostname: local-mssql
+      image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+      ports: 
+      - "1433:1433"
+      environment: 
+      - "SA_PASSWORD=Secret123!%"
+      - "MSSQL_PID=Express"
+      - "ACCEPT_EULA=Y"
+      - "TZ=Europe/Stockholm"
+      networks: 
+        reporting:
+          ipv4_address: 172.16.240.4
+          aliases: 
+          - local-mssql
+networks:
+   reporting:
+     external: true

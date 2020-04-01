@@ -1,7 +1,9 @@
-﻿namespace Digitizeit.Quartz.HostedService.Interfaces
+﻿using System.Collections.Specialized;
+
+namespace Digitizeit.Quartz.HostedService.Interfaces
 {
     public interface ICreateDatabase
     {
-        void Init(string connectionString);
+        NameValueCollection Init();
     }
 }

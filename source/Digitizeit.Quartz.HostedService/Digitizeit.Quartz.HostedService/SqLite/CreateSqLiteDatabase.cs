@@ -1,36 +1,45 @@
 ﻿using Digitizeit.Quartz.HostedService.Extensions;
 using Digitizeit.Quartz.HostedService.Helpers;
+using Digitizeit.Quartz.HostedService.Interfaces;
+using Digitizeit.Quartz.HostedService.Models;
+using Digitizeit.Quartz.HostedService.Options;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using System;
+using System.Collections.Specialized;
 using System.IO;
-using Digitizeit.Quartz.HostedService.Interfaces;
 
 namespace Digitizeit.Quartz.HostedService.SqLite
 {
     public class CreateSqLiteDatabase : ICreateDatabase
     {
+        private readonly QuartzSqliteOptions _options;
+        private readonly JobStoreSettings _settings;
         private readonly ILogger<CreateSqLiteDatabase> _logger;
+        private readonly NameValueCollection _propertiesCollection;
 
-        public CreateSqLiteDatabase(ILogger<CreateSqLiteDatabase> logger)
+        public CreateSqLiteDatabase(ILogger<CreateSqLiteDatabase> logger, QuartzSqliteOptions options, JobStoreSettings settings)
         {
+            _options = options;
+            _settings = settings;
             _logger = logger ?? new NullLogger<CreateSqLiteDatabase>();
+            _propertiesCollection = _options.GetDatabaseProperties(settings);
         }
 
         /// <summary>
         /// Initiation
         /// </summary>
-        /// <param name="connectionString"></param>
-        public void Init(string connectionString)
+        /// <returns>NameValueCollection with database Properties</returns>
+        public NameValueCollection Init()
         {
-            if (!DbExist(connectionString))
+            if (!DbExist(_settings.ConnectionString))
             {
-                _logger.LogDebug($"Database {connectionString.GetDatabaseNameSqlite()} not found, trying to create database.");
-                CreateDatabase(connectionString);
-                return;
+                _logger.LogDebug($"Database {_settings.ConnectionString.GetDatabaseNameSqlite()} not found, trying to create database.");
+                CreateDatabase(_settings.ConnectionString);
             }
-            _logger.LogDebug($"Found and using database {connectionString.GetSqliteConnectionString()}");
+            _logger.LogDebug($"Found and using database {_settings.ConnectionString.GetSqliteConnectionString()}");
+            return _propertiesCollection;
         }
 
         /// <summary>

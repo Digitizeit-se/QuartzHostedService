@@ -4,29 +4,39 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Specialized;
 using System.Data;
 using Digitizeit.Quartz.HostedService.Interfaces;
+using Digitizeit.Quartz.HostedService.Models;
+using Digitizeit.Quartz.HostedService.Options;
 
 namespace Digitizeit.Quartz.HostedService.MySql
 {
     public class CreateMySqlDatabase : ICreateDatabase
     {
+        private readonly QuartzMySqlOptions _options;
+        private readonly JobStoreSettings _settings;
         private readonly ILogger<CreateMySqlDatabase> _logger;
+        private readonly NameValueCollection _propertiesCollection;
 
-        public CreateMySqlDatabase(ILogger<CreateMySqlDatabase> logger)
+        public CreateMySqlDatabase(ILogger<CreateMySqlDatabase> logger, QuartzMySqlOptions options, JobStoreSettings settings)
         {
+            _options = options;
+            _settings = settings;
             _logger = logger ?? new NullLogger<CreateMySqlDatabase>();
+            _propertiesCollection = _options.GetDatabaseProperties(settings);
         }
 
-        public void Init(string connectionString)
+        public NameValueCollection Init()
         {
-            if (!DbExist(connectionString))
+            if (!DbExist(_settings.ConnectionString))
             {
-                _logger.LogDebug($"Database {connectionString.GetDatabaseNameSqlServer()} not found, trying to create database.");
-                CreateDatabase(connectionString);
-                return;
+                _logger.LogDebug($"Database {_settings.ConnectionString.GetDatabaseNameSqlServer()} not found, trying to create database.");
+                CreateDatabase(_settings.ConnectionString);
             }
-            _logger.LogDebug($"Found and using database {connectionString.GetDatabaseNameSqlServer()}");
+
+            _logger.LogDebug($"Found and using database {_settings.ConnectionString.GetDatabaseNameSqlServer()}");
+            return _propertiesCollection;
         }
 
         private bool DbExist(string connectionString)

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digitizeit.Quartz.HostedSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digitizeit.Quartz.HostedService.Test", "Digitizeit.Quartz.HostedService.Test\Digitizeit.Quartz.HostedService.Test.csproj", "{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{960EC8D3-71C7-4A4C-B5EC-0DE351437009}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostedServiceImplementation", "..\..\Example\HostedServiceImplementation\HostedServiceImplementation.csproj", "{7A36656A-A59C-45BB-AE96-54FAE5A3F34B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A36656A-A59C-45BB-AE96-54FAE5A3F34B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A36656A-A59C-45BB-AE96-54FAE5A3F34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A36656A-A59C-45BB-AE96-54FAE5A3F34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A36656A-A59C-45BB-AE96-54FAE5A3F34B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7A36656A-A59C-45BB-AE96-54FAE5A3F34B} = {960EC8D3-71C7-4A4C-B5EC-0DE351437009}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AFF96183-276A-4D94-BC57-639C2F381EB7}

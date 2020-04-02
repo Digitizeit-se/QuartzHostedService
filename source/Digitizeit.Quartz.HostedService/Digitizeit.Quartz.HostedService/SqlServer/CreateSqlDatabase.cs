@@ -15,11 +15,11 @@ namespace Digitizeit.Quartz.HostedService.SqlServer
     public class CreateSqlDatabase : ICreateDatabase
     {
         private readonly QuartzSqlServerOption _options;
-        private readonly JobStoreSettings _settings;
+        private readonly JobStore _settings;
         private readonly ILogger<CreateSqlDatabase> _logger;
         private readonly NameValueCollection _propertiesCollection;
 
-        public CreateSqlDatabase(ILogger<CreateSqlDatabase> logger, QuartzSqlServerOption options, JobStoreSettings settings)
+        public CreateSqlDatabase(ILogger<CreateSqlDatabase> logger, QuartzSqlServerOption options, JobStore settings)
         {
             _options = options;
             _settings = settings;
@@ -35,7 +35,7 @@ namespace Digitizeit.Quartz.HostedService.SqlServer
                 CreateDatabase(_settings.ConnectionString);
             }
 
-            _logger.LogDebug($"Found and using database {_settings.ConnectionString.GetDatabaseNameSqlServer()}");
+            _logger.LogDebug($"Found and using SqlServer database name: {_settings.ConnectionString.GetDatabaseNameSqlServer()}");
             return _propertiesCollection;
         }
 

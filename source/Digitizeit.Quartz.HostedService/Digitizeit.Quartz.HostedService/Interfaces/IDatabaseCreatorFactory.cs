@@ -4,6 +4,6 @@ namespace Digitizeit.Quartz.HostedService.Interfaces
 {
     public interface IDatabaseCreatorFactory
     {
-        ICreateDatabase GetDatabaseCreator(JobStoreSettings jobStoreSettings);
+        ICreateDatabase GetDatabaseCreator(JobStore jobStore);
     }
 }

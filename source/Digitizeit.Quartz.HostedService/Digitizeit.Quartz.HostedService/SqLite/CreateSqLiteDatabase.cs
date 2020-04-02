@@ -15,11 +15,11 @@ namespace Digitizeit.Quartz.HostedService.SqLite
     public class CreateSqLiteDatabase : ICreateDatabase
     {
         private readonly QuartzSqliteOptions _options;
-        private readonly JobStoreSettings _settings;
+        private readonly JobStore _settings;
         private readonly ILogger<CreateSqLiteDatabase> _logger;
         private readonly NameValueCollection _propertiesCollection;
 
-        public CreateSqLiteDatabase(ILogger<CreateSqLiteDatabase> logger, QuartzSqliteOptions options, JobStoreSettings settings)
+        public CreateSqLiteDatabase(ILogger<CreateSqLiteDatabase> logger, QuartzSqliteOptions options, JobStore settings)
         {
             _options = options;
             _settings = settings;
@@ -38,7 +38,7 @@ namespace Digitizeit.Quartz.HostedService.SqLite
                 _logger.LogDebug($"Database {_settings.ConnectionString.GetDatabaseNameSqlite()} not found, trying to create database.");
                 CreateDatabase(_settings.ConnectionString);
             }
-            _logger.LogDebug($"Found and using database {_settings.ConnectionString.GetSqliteConnectionString()}");
+            _logger.LogDebug($"Found and using SqlLite database name: {_settings.ConnectionString.GetSqliteConnectionString()}");
             return _propertiesCollection;
         }
 

@@ -1,30 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Digitizeit.Quartz.HostedService.Models;
 using System.Collections.Specialized;
-using System.Text;
-using Digitizeit.Quartz.HostedService.Models;
-using Digitizeit.Quartz.HostedService.SqlServer;
 
 namespace Digitizeit.Quartz.HostedService.Options
 {
     public class QuartzSqlServerOption
     {
         private NameValueCollection _dataBaseProperties;
-        private readonly CreateSqlDatabase _createSqlDatabase;
 
-        public QuartzSqlServerOption(CreateSqlDatabase createSqlDatabase)
-        {
-            _createSqlDatabase = createSqlDatabase;
-        }
-
-        public NameValueCollection GetDatabaseProperties(JobStoreSettings jobStore)
+        public NameValueCollection GetDatabaseProperties(JobStore jobStore)
         {
             SetProperties(jobStore);
-            //_createSqlDatabase.Init(jobStore.ConnectionString);
             return _dataBaseProperties;
         }
 
-        private void SetProperties(JobStoreSettings jobStore)
+        private void SetProperties(JobStore jobStore)
         {
             _dataBaseProperties = new NameValueCollection
             {

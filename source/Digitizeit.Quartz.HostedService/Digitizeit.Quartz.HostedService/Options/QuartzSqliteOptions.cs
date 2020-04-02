@@ -1,6 +1,5 @@
 ﻿using Digitizeit.Quartz.HostedService.Extensions;
 using Digitizeit.Quartz.HostedService.Models;
-using Digitizeit.Quartz.HostedService.SqLite;
 using Microsoft.Data.Sqlite;
 using Quartz.Impl.AdoJobStore.Common;
 using System.Collections.Specialized;
@@ -11,21 +10,14 @@ namespace Digitizeit.Quartz.HostedService.Options
     public class QuartzSqliteOptions
     {
         private NameValueCollection _dataBaseProperties;
-        private readonly CreateSqLiteDatabase _createSqliteDatabase;
 
-        public QuartzSqliteOptions(CreateSqLiteDatabase createSqliteDatabase)
-        {
-            _createSqliteDatabase = createSqliteDatabase;
-        }
-
-        public NameValueCollection GetDatabaseProperties(JobStoreSettings jobStore)
+        public NameValueCollection GetDatabaseProperties(JobStore jobStore)
         {
             SetProperties(jobStore);
-            //_createSqliteDatabase.Init(jobStore.ConnectionString);
             return _dataBaseProperties;
         }
 
-        private void SetProperties(JobStoreSettings jobStore)
+        private void SetProperties(JobStore jobStore)
         {
             SetDbMetaData();
             _dataBaseProperties = new NameValueCollection

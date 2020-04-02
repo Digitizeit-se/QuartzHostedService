@@ -19,21 +19,23 @@ namespace Digitizeit.Quartz.HostedService.Factory
             _services = services;
         }
 
-        public ICreateDatabase GetDatabaseCreator(JobStoreSettings jobStoreSettings)
+        public ICreateDatabase GetDatabaseCreator(JobStore jobStore)
         {
-            ICreateDatabase createDb;
-            switch (jobStoreSettings.Provider)
+            ICreateDatabase createDb = null;
+            if (jobStore == null) return createDb;
+
+            switch (jobStore.Provider)
             {
                 case "SqlServer":
-                    createDb = GetSqlCreator(jobStoreSettings);
+                    createDb = GetSqlCreator(jobStore);
                     break;
 
                 case "sqlite-custom":
-                    createDb = GetSqliteCreator(jobStoreSettings);
+                    createDb = GetSqliteCreator(jobStore);
                     break;
 
                 case "MySql-50":
-                    createDb = GetMySqlCreator(jobStoreSettings);
+                    createDb = GetMySqlCreator(jobStore);
                     break;
 
                 default:
@@ -44,17 +46,17 @@ namespace Digitizeit.Quartz.HostedService.Factory
             return createDb;
         }
 
-        private ICreateDatabase GetMySqlCreator(JobStoreSettings jobStoreSettings)
+        private ICreateDatabase GetMySqlCreator(JobStore jobStoreSettings)
         {
             return new CreateMySqlDatabase(_services.GetService<ILogger<CreateMySqlDatabase>>(), _services.GetService<QuartzMySqlOptions>(), jobStoreSettings);
         }
 
-        private ICreateDatabase GetSqlCreator(JobStoreSettings jobStoreSettings)
+        private ICreateDatabase GetSqlCreator(JobStore jobStoreSettings)
         {
             return new CreateSqlDatabase(_services.GetService<ILogger<CreateSqlDatabase>>(), _services.GetService<QuartzSqlServerOption>(), jobStoreSettings);
         }
 
-        private ICreateDatabase GetSqliteCreator(JobStoreSettings jobStoreSettings)
+        private ICreateDatabase GetSqliteCreator(JobStore jobStoreSettings)
         {
             return new CreateSqLiteDatabase(_services.GetService<ILogger<CreateSqLiteDatabase>>(), _services.GetService<QuartzSqliteOptions>(), jobStoreSettings);
         }

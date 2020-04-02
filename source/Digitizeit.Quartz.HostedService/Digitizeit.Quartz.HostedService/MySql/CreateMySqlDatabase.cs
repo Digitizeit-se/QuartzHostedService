@@ -15,11 +15,11 @@ namespace Digitizeit.Quartz.HostedService.MySql
     public class CreateMySqlDatabase : ICreateDatabase
     {
         private readonly QuartzMySqlOptions _options;
-        private readonly JobStoreSettings _settings;
+        private readonly JobStore _settings;
         private readonly ILogger<CreateMySqlDatabase> _logger;
         private readonly NameValueCollection _propertiesCollection;
 
-        public CreateMySqlDatabase(ILogger<CreateMySqlDatabase> logger, QuartzMySqlOptions options, JobStoreSettings settings)
+        public CreateMySqlDatabase(ILogger<CreateMySqlDatabase> logger, QuartzMySqlOptions options, JobStore settings)
         {
             _options = options;
             _settings = settings;
@@ -35,7 +35,7 @@ namespace Digitizeit.Quartz.HostedService.MySql
                 CreateDatabase(_settings.ConnectionString);
             }
 
-            _logger.LogDebug($"Found and using database {_settings.ConnectionString.GetDatabaseNameSqlServer()}");
+            _logger.LogDebug($"Found and using mysql database name: {_settings.ConnectionString.GetDatabaseNameSqlServer()}");
             return _propertiesCollection;
         }
 

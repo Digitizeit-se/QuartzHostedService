@@ -35,7 +35,7 @@ namespace Digitizeit.Quartz.HostedService.Extensions
             services.AddSingleton<IJobFactory, JobFactory>();
             services.AddSingleton(provider =>
             {
-                var option = new QuartzBaseOptions(config, services, provider.GetService<DatabaseCreatorFactory>(), provider.GetService<ILogger<QuartzBaseOptions>>());
+                var option = new QuartzBaseOptions(config, services, provider.GetService<IDatabaseCreatorFactory>(), provider.GetService<ILogger<QuartzBaseOptions>>());
                 var sf = new StdSchedulerFactory(option.ToProperties());
                 var scheduler = sf.GetScheduler().Result;
                 scheduler.JobFactory = provider.GetService<IJobFactory>();

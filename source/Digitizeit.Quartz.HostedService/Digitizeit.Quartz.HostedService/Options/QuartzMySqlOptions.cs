@@ -1,5 +1,4 @@
 ﻿using Digitizeit.Quartz.HostedService.Models;
-using Digitizeit.Quartz.HostedService.MySql;
 using MySql.Data.MySqlClient;
 using Quartz.Impl.AdoJobStore.Common;
 using System.Collections.Specialized;
@@ -10,21 +9,14 @@ namespace Digitizeit.Quartz.HostedService.Options
     public class QuartzMySqlOptions
     {
         private NameValueCollection _dataBaseProperties;
-        private readonly CreateMySqlDatabase _cretaeMySqlDatabase;
 
-        public QuartzMySqlOptions(CreateMySqlDatabase cretaeMySqlDatabase)
-        {
-            _cretaeMySqlDatabase = cretaeMySqlDatabase;
-        }
-
-        public NameValueCollection GetDatabaseProperties(JobStoreSettings jobStore)
+        public NameValueCollection GetDatabaseProperties(JobStore jobStore)
         {
             SetProperties(jobStore);
-            //_cretaeMySqlDatabase.Init(jobStore.ConnectionString);
             return _dataBaseProperties;
         }
 
-        private void SetProperties(JobStoreSettings jobStore)
+        private void SetProperties(JobStore jobStore)
         {
             SetDbMetaData();
             _dataBaseProperties = new NameValueCollection

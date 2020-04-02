@@ -1,11 +1,19 @@
-# Digitizeit.QuartzHostedService
+# Digitizit.QuartzHostedService
 Goal of this project is to make it easy to get up and running with https://www.quartz-scheduler.net/ in dotnet core
 
 ## This project is based on the work of 
 https://github.com/ErikXu/Quartz.HostedService
 
 ## Getting started using in memory scheduler .
-Refrence Digitizeit.QuartzHostedService from youre application.
+1. Refrence Digitizeit.QuartzHostedService from youre application.
+2. Add quartz to youre appsettings.
+3. Add a job to youre project that implements Ijob interface from quartz 
+4. Add "quartz_job.xml" to project to hold information of jobs to run and when to trigger.
+5. Add refrense to nuget pakage https://www.nuget.org/packages/Quartz/  for access to quartz IJob interface 
+6. Add refrence to nuget https://www.nuget.org/packages/Quartz.Plugins/ for access to quartz xml job Scheduling
+
+
+**Note.** if no provider is provided in the appsettings  Digitizit.QuartzHostedService will default to in memory database
 
  appsettings.json  
 
@@ -21,8 +29,36 @@ Refrence Digitizeit.QuartzHostedService from youre application.
   }
 
 ```
-*  "type": "Quartz.Plugin.Xml.XMLSchedulingDataProcessorPlugin, Quartz.Plugins",  => Instruct Quartz to use job settings from xml.
-*  "fileNames": "quartz_jobs.xml" : say that a file name quartz_jobs.xml  => instruct  Quartz where to find  job instructions.
+
+* ` "type": "Quartz.Plugin.Xml.XMLSchedulingDataProcessorPlugin, Quartz.Plugins" `  Instruct Quartz to use job settings from xml.
+*  ` "fileNames": "quartz_jobs.xml" `  Tell Quartz  a file named quartz_jobs.xml is where job information is stored.
+
+Example job 
+
+```Csharp
+using Microsoft.Extensions.Logging;
+using Quartz;
+using System.Threading.Tasks;
+
+namespace QuartzCore
+{
+    public class TestJob : IJob
+    {
+        private readonly ILogger _logger;
+
+        public TestJob(ILogger<TestJob> logger)
+        {
+            _logger = logger;
+        }
+
+        public Task Execute(IJobExecutionContext context)
+        {
+            _logger.LogInformation("Test job is running...");
+            return Task.CompletedTask;
+        }
+    }
+}
+```
 
 quartz_job.xml the xml file can hold one to meny job instructions 
 ```xml
@@ -130,5 +166,48 @@ minimum settings in application.json
 
 ```
 
-Difference from SqlServer is, ConnectionString is a "**file Path**" and provder change to "**sqlite-custom**"
+Difference from SqlServer is, ConnectionString is a "**file Path**" and provider change to "**sqlite-custom**"
 
+## Configure Quartz to use MySql database 
+
+Settings in application.json 
+
+```json 
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug"
+    }
+  },
+  "quartz": {
+    "scheduler": {
+      "instanceName": "QuartzCore",
+      "instanceId": "QuartzCore"
+    },
+    "threadPool": {
+      "type": "Quartz.Simpl.SimpleThreadPool, Quartz",
+      "threadPriority": "Normal",
+      "threadCount": 10
+    },
+    "plugin": {
+      "jobInitializer": {
+        "type": "Quartz.Plugin.Xml.XMLSchedulingDataProcessorPlugin, Quartz.Plugins",
+        "fileNames": "quartz_jobs.xml"
+      }
+    },
+    "jobStore": {
+      "misfireThreshold": "60000",
+      "type": "Quartz.Impl.AdoJobStore.JobStoreTX, Quartz",
+      "useProperties": "true",
+      "dataSource": "default",
+      "tablePrefix": "QRTZ_",
+      "connectionString": "server=localhost;Database=Quartz;uid=root;pwd=root;",
+      "provider": "MySql-50"
+    },
+    "serializer": {
+      "type": "json"
+    }
+  }
+}
+
+```

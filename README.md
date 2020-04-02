@@ -1,4 +1,4 @@
-# Digitiziet.QuartzHostedService
+# Digitizet.QuartzHostedService
 Goal of this project is to make it easy to get up and running with https://www.quartz-scheduler.net/ in dotnet core
 
 ## This project is based on the work of 

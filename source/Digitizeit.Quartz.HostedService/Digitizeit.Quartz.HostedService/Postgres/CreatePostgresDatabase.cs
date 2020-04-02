@@ -1,43 +1,43 @@
 ﻿using Digitizeit.Quartz.HostedService.Extensions;
 using Digitizeit.Quartz.HostedService.Helpers;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Specialized;
-using System.Data;
 using Digitizeit.Quartz.HostedService.Interfaces;
 using Digitizeit.Quartz.HostedService.Models;
 using Digitizeit.Quartz.HostedService.Options;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using Npgsql;
+using System;
+using System.Collections.Specialized;
+using System.Data;
 
-namespace Digitizeit.Quartz.HostedService.MySql
+namespace Digitizeit.Quartz.HostedService.Postgres
 {
-    public class CreateMySqlDatabase : ICreateDatabase
+    public class CreatePostgresDatabase : ICreateDatabase
     {
-        private readonly QuartzMySqlOptions _options;
+        private readonly QuartzPostgresOptions _options;
         private readonly JobStore _settings;
-        private readonly ILogger<CreateMySqlDatabase> _logger;
+        private readonly ILogger<CreatePostgresDatabase> _logger;
         private readonly NameValueCollection _propertiesCollection;
-        private readonly string _databaseName;
+        private readonly string _databseName;
 
-        public CreateMySqlDatabase(ILogger<CreateMySqlDatabase> logger, QuartzMySqlOptions options, JobStore settings)
+        public CreatePostgresDatabase(ILogger<CreatePostgresDatabase> logger, QuartzPostgresOptions options, JobStore settings)
         {
             _options = options;
             _settings = settings;
-            _logger = logger ?? new NullLogger<CreateMySqlDatabase>();
+            _logger = logger ?? new NullLogger<CreatePostgresDatabase>();
             _propertiesCollection = _options.GetDatabaseProperties(settings);
-            _databaseName = _settings.ConnectionString.GetDatabaseNameSqlServer();
+            _databseName = _settings.ConnectionString.GetDatabaseNameSqlServer();
         }
 
         public NameValueCollection Init()
         {
             if (!DbExist(_settings.ConnectionString))
             {
-                _logger.LogDebug($"Database {_databaseName} not found, trying to create database.");
+                _logger.LogDebug($"Database {_settings.ConnectionString.GetDatabaseNameSqlServer()} not found, trying to create database.");
                 CreateDatabase(_settings.ConnectionString);
             }
 
-            _logger.LogDebug($"Found and using mysql database name: {_databaseName}");
+            _logger.LogDebug($"Found and using Postgres database name: {_databseName}");
             return _propertiesCollection;
         }
 
@@ -45,19 +45,19 @@ namespace Digitizeit.Quartz.HostedService.MySql
         {
             try
             {
-                var connection = new MySqlConnection(connectionString.GetConnectionOnlySqlServer());
-                var sqlCreateDbQuery = $"select schema_name from information_schema.schemata where schema_name = '{_databaseName}'";
+                var connection = new NpgsqlConnection(connectionString.GetConnectionOnlySqlServer());
+                var sqlCreateDbQuery = $"SELECT datname from pg_database WHERE datname='{_databseName}'";
 
                 using (connection)
                 {
-                    using (var sqlCmd = new MySqlCommand(sqlCreateDbQuery, connection))
+                    using (var sqlCmd = new NpgsqlCommand(sqlCreateDbQuery, connection))
                     {
                         connection.Open();
                         var resultObj = sqlCmd.ExecuteScalar();
 
                         if (resultObj != null)
                         {
-                            if (resultObj.ToString() == _databaseName) return true;
+                            if (resultObj.ToString() == _databseName) return true;
                         }
 
                         connection.Close();
@@ -79,30 +79,30 @@ namespace Digitizeit.Quartz.HostedService.MySql
                 //Create database
                 var connectionOnly = connectionString.GetConnectionOnlySqlServer();
 
-                using (var connection = new MySqlConnection(connectionOnly))
+                using (var connection = new NpgsqlConnection(connectionOnly))
                 {
                     connection.Open();
                     var command = connection.CreateCommand();
-                    command.CommandText = $"CREATE DATABASE {_databaseName} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+                    command.CommandText = $"CREATE DATABASE {_databseName}";
                     command.ExecuteNonQuery();
                 }
 
-                _logger.LogDebug($"Database {_databaseName} Created.");
+                _logger.LogDebug($"Database {_databseName} Created.");
 
                 //Create tables for database
-                using (var connection = new MySqlConnection(connectionString))
+                using (var connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
                     var command = connection.CreateCommand();
                     command.CommandType = CommandType.Text;
 
-                    _logger.LogDebug("using QuartzMySql.sql to create database tables.");
+                    _logger.LogDebug("using QuartzPostgres.sql to create database tables.");
 
-                    command.CommandText = EmbeddedResourceHelper.GetTextResource("QuartzMySql.sql");
+                    command.CommandText = EmbeddedResourceHelper.GetTextResource("QuartzPostgres.sql");
                     if (string.IsNullOrEmpty(command.CommandText))
                     {
-                        _logger.LogError($"Embedded resource QuartzMySql.sql is missing.");
-                        throw new Exception("Reading embedded resource QuartzMySql.sql resulted in null value.");
+                        _logger.LogError($"Embedded resource QuartzPostgres.sql is missing.");
+                        throw new Exception("Reading embedded resource QuartzPostgres.sql resulted in null value.");
                     }
                     command.ExecuteNonQuery();
                 }

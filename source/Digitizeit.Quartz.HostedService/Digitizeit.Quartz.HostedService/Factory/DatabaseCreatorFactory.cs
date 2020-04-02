@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using Digitizeit.Quartz.HostedService.Models;
 using Digitizeit.Quartz.HostedService.Options;
+using Digitizeit.Quartz.HostedService.Postgres;
 
 namespace Digitizeit.Quartz.HostedService.Factory
 {
@@ -38,6 +39,18 @@ namespace Digitizeit.Quartz.HostedService.Factory
                     createDb = GetMySqlCreator(jobStore);
                     break;
 
+                case "MySql-51":
+                    createDb = GetMySqlCreator(jobStore);
+                    break;
+
+                case "MySql-65":
+                    createDb = GetMySqlCreator(jobStore);
+                    break;
+
+                case "Npgsql-20":
+                    createDb = GetPostgresCreator(jobStore);
+                    break;
+
                 default:
                     createDb = null;
                     break;
@@ -59,6 +72,11 @@ namespace Digitizeit.Quartz.HostedService.Factory
         private ICreateDatabase GetSqliteCreator(JobStore jobStoreSettings)
         {
             return new CreateSqLiteDatabase(_services.GetService<ILogger<CreateSqLiteDatabase>>(), _services.GetService<QuartzSqliteOptions>(), jobStoreSettings);
+        }
+
+        private ICreateDatabase GetPostgresCreator(JobStore jobStoreSettings)
+        {
+            return new CreatePostgresDatabase(_services.GetService<ILogger<CreatePostgresDatabase>>(), _services.GetService<QuartzPostgresOptions>(), jobStoreSettings);
         }
     }
 }

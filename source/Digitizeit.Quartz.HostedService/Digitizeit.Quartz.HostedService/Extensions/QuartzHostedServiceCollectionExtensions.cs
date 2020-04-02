@@ -30,6 +30,7 @@ namespace Digitizeit.Quartz.HostedService.Extensions
             services.AddTransient<QuartzSqlServerOption>();
             services.AddTransient<QuartzSqliteOptions>();
             services.AddTransient<QuartzMySqlOptions>();
+            services.AddTransient<QuartzPostgresOptions>();
             services.AddTransient<IDatabaseCreatorFactory, DatabaseCreatorFactory>();
 
             services.AddSingleton<IJobFactory, JobFactory>();

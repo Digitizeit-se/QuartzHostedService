@@ -211,3 +211,6 @@ Settings in application.json
 }
 
 ```
+## Configure Quartz to use PostgresSql database 
+
+Set provider to ` "provider": "Npgsql-20"`

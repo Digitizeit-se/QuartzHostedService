@@ -58,7 +58,7 @@ namespace HostedServiceImplementation
                 })
                 .ConfigureAppConfiguration((hostContext, configApp) =>
                 {
-                    configApp.AddJsonFile($"appsettings.{ProviderSwitch.Memory.ToString()}.json",
+                    configApp.AddJsonFile($"appsettings.{ProviderSwitch.Postgres.ToString()}.json",
                         true);
                 })
                 .ConfigureServices((hostContext, services) =>
@@ -82,6 +82,7 @@ namespace HostedServiceImplementation
         Memory,
         SqLite,
         SqlServer,
-        MySql
+        MySql,
+        Postgres
     }
 }

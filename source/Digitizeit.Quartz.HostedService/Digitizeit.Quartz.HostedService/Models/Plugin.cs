@@ -2,6 +2,6 @@
 {
     public class Plugin
     {
-        public JobInitializerSettings JobInitializerSettings { get; set; }
+        public JobInitializer JobInitializer { get; set; }
     }
 }

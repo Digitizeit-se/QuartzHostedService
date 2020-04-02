@@ -1,6 +1,6 @@
 ﻿namespace Digitizeit.Quartz.HostedService.Models
 {
-    public class JobInitializerSettings
+    public class JobInitializer
     {
         public string Type { get; set; }
         public string FileNames { get; set; }

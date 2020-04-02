@@ -1,6 +1,6 @@
 ﻿namespace Digitizeit.Quartz.HostedService.Models
 {
-    public class JobStoreSettings
+    public class JobStore
     {
         public string MisfireThreshold { get; set; }
         public string Type { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace Digitizeit.Quartz.HostedService.Models
 {
-    public class ThreadPoolSettings
+    public class ThreadPool
     {
         public string Type { get; set; }
         public string ThreadPriority { get; set; }

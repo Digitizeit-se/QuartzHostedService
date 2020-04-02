@@ -1,0 +1,20 @@
+version: "2.4"
+
+services:
+    postgres:
+      hostname: local-postgres
+      image: postgres
+      ports: 
+      - "5432:5432"
+      environment: 
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: Secret123!%
+       PGDATA: /data/postgres
+      networks: 
+        reporting:
+          ipv4_address: 172.16.240.4
+          aliases: 
+          - local-postgres
+networks:
+    reporting:
+     external: true

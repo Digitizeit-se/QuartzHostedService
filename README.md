@@ -4,6 +4,15 @@ Goal of this project is to make it easy to get up and running with https://www.q
 ## This project is based on the work of 
 https://github.com/ErikXu/Quartz.HostedService
 
+## Implemented database support 
+* InMemory 
+* SqLite
+* MySql
+* Postgres
+* Ms SQL server
+* Firebird **Comming soon**
+* Oracle **Comming soon**
+
 ## Getting started using in memory scheduler .
 1. Refrence Digitizeit.QuartzHostedService from youre application.
 2. Add quartz to youre appsettings.

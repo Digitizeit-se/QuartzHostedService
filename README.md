@@ -1,6 +1,9 @@
 # Digitizeit.QuartzHostedService
 Goal of this project is to make it easy to get up and running with https://www.quartz-scheduler.net/ in dotnet core
 
+# status
+[![Build status]
+(https://tfs.pcis.se/PCIS-DEV/QuartzHostedService/_apis/build/status/QuartzHostedService-ASP.NET%20Core-CI)](https://tfs.pcis.se/PCIS-DEV/QuartzHostedService/_build/latest?definitionId=8)
 ## This project is based on the work of 
 https://github.com/ErikXu/Quartz.HostedService
 

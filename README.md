@@ -14,7 +14,7 @@ https://github.com/ErikXu/Quartz.HostedService
 * Oracle **Comming soon**
 
 ## Getting started using in memory scheduler .
-1. Refrence Digitizeit.QuartzHostedService from youre application.
+1. Refrence Digitizeit.QuartzHostedService from youre application. use nuget Install-Package Digitizeit.Quartz.HostedService -Version 0.1.4
 2. Add quartz to youre appsettings.
 3. Add a job to youre project that implements Ijob interface from quartz 
 4. Add "quartz_job.xml" to project to hold information of jobs to run and when to trigger.

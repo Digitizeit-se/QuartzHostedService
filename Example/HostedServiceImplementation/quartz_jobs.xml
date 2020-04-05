@@ -12,32 +12,38 @@
   <schedule>
     <job>
       <name>FirstJob</name>
-      <group>TestGroup</group>
+      <group>FirstGroup</group>
       <description>FirstJob</description>
       <job-type>HostedServiceImplementation.Jobs.FirstJob, HostedServiceImplementation</job-type>
       <durable>true</durable>
       <recover>true</recover>
     </job>
-    <!--
+    <job>
+      <name>SecondJob</name>
+      <group>SecondGroup</group>
+      <description>FirstJob</description>
+      <job-type>HostedServiceImplementation.Jobs.SecondJob, HostedServiceImplementation</job-type>
+      <durable>true</durable>
+      <recover>true</recover>
+    </job>
     <trigger>
       <simple>
         <name>TestTrigger</name>
-        <group>TestGroup</group>
+        <group>SecondGroup</group>
         <description>Test Trigger</description>
-        <job-name>TestJob</job-name>
-        <job-group>TestGroup</job-group>
+        <job-name>SecondJob</job-name>
+        <job-group>SecondGroup</job-group>
         <repeat-count>-1</repeat-count>
         <repeat-interval>2000</repeat-interval>
       </simple>
     </trigger>
--->
     <trigger>
       <cron>
         <name>FirstJobTrigger</name>
-        <group>TestGroup</group>
+        <group>FirstGroup</group>
         <description>FirstJob Trigger</description>
         <job-name>FirstJob</job-name>
-        <job-group>TestGroup</job-group>
+        <job-group>FirstGroup</job-group>
         <cron-expression>0/1 * * * * ?</cron-expression>
       </cron>
     </trigger>

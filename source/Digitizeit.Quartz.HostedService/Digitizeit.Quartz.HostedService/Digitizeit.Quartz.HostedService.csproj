@@ -5,12 +5,12 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>John Larsen</Authors>
     <Company>Digitizeit.se</Company>
-    <Description>Easy to implement quartz service, set backing database from appsettings json files.
+    <Description>.Net Core easy to implement generic service and Quartz to  Implement Background Schedule Tasks. Set backing database from appsettings json files.
 Supported databases: Memory, Ms SQL server, Postgres, Mysql, SqLite</Description>
     <PackageProjectUrl>https://github.com/Digitizeit-se/QuartzHostedService</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Digitizeit-se/QuartzHostedService</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>Core; Quartz.Net; Digitizeit;</PackageTags>
+    <PackageTags>DotnetCore; Quartz; Digitizeit;Service;Schedule;</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

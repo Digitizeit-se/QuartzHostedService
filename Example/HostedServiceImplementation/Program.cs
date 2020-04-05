@@ -7,6 +7,7 @@ using Serilog;
 using Serilog.Events;
 using System;
 using System.IO;
+using Quartz;
 
 namespace HostedServiceImplementation
 {
@@ -65,6 +66,7 @@ namespace HostedServiceImplementation
                 {
                     services.AddQuartzHostedService(hostContext.Configuration);
                     services.AddSingleton<FirstJob, FirstJob>();
+                    services.AddSingleton<SecondJob, SecondJob>();
                 })
                 .UseConsoleLifetime()
                 .UseSerilog();

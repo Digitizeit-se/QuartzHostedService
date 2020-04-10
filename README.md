@@ -88,9 +88,11 @@ This is a HostBuilder from a console application
 Dotnet core Asp project Startup.cs
 
 ```Csharp
-public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+public IConfiguration Configuration { get; }
+
+public void ConfigureServices(IServiceCollection services)
         {           
-                  services.AddQuartzHostedService(configuration);
+                  services.AddQuartzHostedService(Configuration);
                   services.AddSingleton<FirstJob, FirstJob>();
         }
 

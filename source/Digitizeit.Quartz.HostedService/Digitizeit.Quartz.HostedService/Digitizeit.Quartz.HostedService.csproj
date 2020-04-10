@@ -35,6 +35,7 @@ Supported databases: Memory, Ms SQL server, Postgres, Mysql, SqLite</Description
     <PackageReference Include="Npgsql" Version="4.1.3.1" />
     <PackageReference Include="Quartz" Version="3.0.7" />
     <PackageReference Include="Quartz.Plugins" Version="3.0.7" />
+    <PackageReference Include="Quartz.Serialization.Json" Version="3.0.7" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 

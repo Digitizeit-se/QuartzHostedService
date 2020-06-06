@@ -1,0 +1,20 @@
+version: "2.4"
+
+services:
+    firebird:
+      hostname: local-firebird
+      image: kpsys/firebird
+      ports: 
+      - "3050:3050"
+      environment:        
+        FIREBIRD_DB_DBNAME: firebird:/usr/local/firebird/examples/empbuild/employee.fdb
+        FIREBIRD_DB_USER: SYSDBA
+        FIREBIRD_DB_PASSWORD: pass
+      networks: 
+        reporting:
+          ipv4_address: 172.16.240.4
+          aliases: 
+          - local-firebird
+networks:
+    reporting:
+     external: true

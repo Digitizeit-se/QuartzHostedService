@@ -59,7 +59,7 @@ namespace HostedServiceImplementation
                 })
                 .ConfigureAppConfiguration((hostContext, configApp) =>
                 {
-                    configApp.AddJsonFile($"appsettings.{ProviderSwitch.Postgres.ToString()}.json",
+                    configApp.AddJsonFile($"appsettings.{ProviderSwitch.Memory.ToString()}.json",
                         true);
                 })
                 .ConfigureServices((hostContext, services) =>

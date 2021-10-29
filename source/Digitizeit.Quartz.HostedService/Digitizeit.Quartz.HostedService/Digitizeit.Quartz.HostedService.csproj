@@ -1,12 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net5.0; netcoreapp3.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>John Larsen</Authors>
     <Company>Digitizeit.se</Company>
-    <Description>.Net Core easy to implement generic service and Quartz to  Implement Background Schedule Tasks. Set backing database from appsettings json files.
-Supported databases: Memory, Ms SQL server, Postgres, Mysql, SqLite</Description>
+    <Description>
+      .Net Core easy to implement generic service and Quartz to  Implement Background Schedule Tasks. Set backing database from appsettings json files.
+      Supported databases: Memory, Ms SQL server, Postgres, Mysql, SqLite
+    </Description>
     <PackageProjectUrl>https://github.com/Digitizeit-se/QuartzHostedService</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Digitizeit-se/QuartzHostedService</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
@@ -28,15 +30,14 @@ Supported databases: Memory, Ms SQL server, Postgres, Mysql, SqLite</Description
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.4" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.11" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="MySql.Data" Version="8.0.23" />
-    <PackageReference Include="Npgsql" Version="5.0.4" />
-    <PackageReference Include="Quartz" Version="3.2.4" />
-    <PackageReference Include="Quartz.Plugins" Version="3.2.4" />
-    <PackageReference Include="Quartz.Serialization.Json" Version="3.2.4" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="MySql.Data" Version="8.0.27" />
+    <PackageReference Include="Npgsql" Version="5.0.10" />
+    <PackageReference Include="Quartz" Version="3.3.3" />
+    <PackageReference Include="Quartz.Plugins" Version="3.3.3" />
+    <PackageReference Include="Quartz.Serialization.Json" Version="3.3.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
-
 </Project>

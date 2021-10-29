@@ -22,39 +22,18 @@ namespace Digitizeit.Quartz.HostedService.Factory
 
         public ICreateDatabase GetDatabaseCreator(JobStore jobStore)
         {
-            ICreateDatabase createDb = null;
-            if (jobStore == null) return createDb;
+            if (jobStore == null) return null;
 
-            switch (jobStore.Provider)
+            var createDb = jobStore.Provider switch
             {
-                case "SqlServer":
-                    createDb = GetSqlCreator(jobStore);
-                    break;
-
-                case "sqlite-custom":
-                    createDb = GetSqliteCreator(jobStore);
-                    break;
-
-                case "MySql-50":
-                    createDb = GetMySqlCreator(jobStore);
-                    break;
-
-                case "MySql-51":
-                    createDb = GetMySqlCreator(jobStore);
-                    break;
-
-                case "MySql-65":
-                    createDb = GetMySqlCreator(jobStore);
-                    break;
-
-                case "Npgsql-20":
-                    createDb = GetPostgresCreator(jobStore);
-                    break;
-
-                default:
-                    createDb = null;
-                    break;
-            }
+                "SqlServer" => GetSqlCreator(jobStore),
+                "sqlite-custom" => GetSqliteCreator(jobStore),
+                "MySql-50" => GetMySqlCreator(jobStore),
+                "MySql-51" => GetMySqlCreator(jobStore),
+                "MySql-65" => GetMySqlCreator(jobStore),
+                "Npgsql-20" => GetPostgresCreator(jobStore),
+                _ => null
+            };
 
             return createDb;
         }

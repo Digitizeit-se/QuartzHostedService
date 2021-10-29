@@ -50,19 +50,17 @@ namespace Digitizeit.Quartz.HostedService.MySql
 
                 using (connection)
                 {
-                    using (var sqlCmd = new MySqlCommand(sqlCreateDbQuery, connection))
+                    using var sqlCmd = new MySqlCommand(sqlCreateDbQuery, connection);
+                    connection.Open();
+                    var resultObj = sqlCmd.ExecuteScalar();
+
+                    if (resultObj != null)
                     {
-                        connection.Open();
-                        var resultObj = sqlCmd.ExecuteScalar();
-
-                        if (resultObj != null)
-                        {
-                            if (resultObj.ToString() == _databaseName) return true;
-                        }
-
-                        connection.Close();
-                        return false;
+                        if (resultObj.ToString() == _databaseName) return true;
                     }
+
+                    connection.Close();
+                    return false;
                 }
             }
             catch (Exception ex)

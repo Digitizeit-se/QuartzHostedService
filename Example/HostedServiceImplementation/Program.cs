@@ -7,7 +7,6 @@ using Serilog;
 using Serilog.Events;
 using System;
 using System.IO;
-using Quartz;
 
 namespace HostedServiceImplementation
 {
@@ -53,13 +52,13 @@ namespace HostedServiceImplementation
                 {
                     configHost.SetBasePath(Directory.GetCurrentDirectory());
                 })
-                .ConfigureAppConfiguration((hostContext, configApp) =>
+                .ConfigureAppConfiguration((_, configApp) =>
                 {
                     configApp.AddJsonFile("appsettings.json", true);
                 })
-                .ConfigureAppConfiguration((hostContext, configApp) =>
+                .ConfigureAppConfiguration((_, configApp) =>
                 {
-                    configApp.AddJsonFile($"appsettings.{ProviderSwitch.Memory.ToString()}.json",
+                    configApp.AddJsonFile($"appsettings.{ProviderSwitch.Memory}.json",
                         true);
                 })
                 .ConfigureServices((hostContext, services) =>

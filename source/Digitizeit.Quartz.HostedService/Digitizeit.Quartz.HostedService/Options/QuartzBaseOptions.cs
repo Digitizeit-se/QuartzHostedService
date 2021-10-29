@@ -39,10 +39,10 @@ namespace Digitizeit.Quartz.HostedService.Options
             var section = config.GetSection("quartz");
             section.Bind(this);
 
-            SetupProvider(services);
+            SetupProvider();
         }
 
-        private void SetupProvider(IServiceCollection services)
+        private void SetupProvider()
         {
             var databaseCreator = _dbCreatorFactory.GetDatabaseCreator(JobStore);
             if (databaseCreator == null)

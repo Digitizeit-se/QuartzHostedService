@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0; net5.0; netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net7.0;net6.0; net5.0; netcoreapp3.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>John Larsen</Authors>
     <Company>Digitizeit.se</Company>
@@ -13,6 +13,7 @@
     <RepositoryUrl>https://github.com/Digitizeit-se/QuartzHostedService</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>DotnetCore; Quartz; Digitizeit;Service;Schedule;</PackageTags>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

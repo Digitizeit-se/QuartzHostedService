@@ -19,6 +19,7 @@ namespace Digitizeit.Quartz.HostedService.Options
         public JobStore JobStore { get; set; }
         public Serializer Serializer { get; set; }
         private NameValueCollection _providerCollection;
+        public JobSettings JobSettings { get; set; }
 
         public QuartzBaseOptions(IConfiguration config, IServiceCollection services, IDatabaseCreatorFactory dbCreatorFactory, ILogger<QuartzBaseOptions> logger = null)
         {
@@ -64,11 +65,17 @@ namespace Digitizeit.Quartz.HostedService.Options
                 ["quartz.threadPool.type"] = ThreadPool?.Type ?? "Quartz.Simpl.SimpleThreadPool, Quartz",
                 //["quartz.threadPool.threadPriority"] = ThreadPool?.ThreadPriority ?? "Normal",
                 ["quartz.threadPool.threadCount"] = ThreadPool?.ThreadCount.ToString() ?? "10",
-                ["quartz.plugin.jobInitializer.type"] = Plugin?.JobInitializer?.Type ?? "Quartz.Plugin.Xml.XMLSchedulingDataProcessorPlugin, Quartz.Plugins",
-                ["quartz.plugin.jobInitializer.fileNames"] = Plugin?.JobInitializer?.FileNames ?? "quartz_jobs.xml",
-                ["quartz.plugin.jobInitializer.scanInterval"] = Plugin?.JobInitializer?.ScanInterval ?? "0",
-                ["quartz.plugin.triggHistory.type"] = "Quartz.Plugin.History.LoggingJobHistoryPlugin, Quartz.Plugins",
-                ["quartz.serializer.type"] = Serializer?.Type ?? "json"
+                //TODO if no JobInitializer set it to null do not default
+                //["quartz.plugin.jobInitializer.type"] = Plugin?.JobInitializer?.Type ?? "Quartz.Plugin.Xml.XMLSchedulingDataProcessorPlugin, Quartz.Plugins",
+                //["quartz.plugin.jobInitializer.fileNames"] = Plugin?.JobInitializer?.FileNames ?? "quartz_jobs.xml",
+                //["quartz.plugin.jobInitializer.scanInterval"] = Plugin?.JobInitializer?.ScanInterval ?? "0",
+                //["quartz.plugin.triggHistory.type"] = "Quartz.Plugin.History.LoggingJobHistoryPlugin, Quartz.Plugins",
+                //["quartz.serializer.type"] = Serializer?.Type ?? "json",
+
+                ["quartz.jobListener.test.type"] = "HostedServiceImplementation.Jobs.FirstJob, HostedServiceImplementation",
+                ["quartz.jobListener.test.name"] = "first",
+                ["quartz.jobListener.test.group"] = "one",
+                ["quartz.jobListener.test.durable"] = "true"
             };
             if (_providerCollection != null)
             {

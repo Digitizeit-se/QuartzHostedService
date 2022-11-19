@@ -1,7 +1,7 @@
 @echo off
 
 REM Only create the network if it does not already exist
-set network_name=quartznet
+set network_name=reporting
 set existing_network=
 for /f %%i in ('docker network ls --filter name^=%network_name% --format^="{{ .Name }}"') do set existing_network=%%i
 if not "%existing_network%" == "%network_name%" (

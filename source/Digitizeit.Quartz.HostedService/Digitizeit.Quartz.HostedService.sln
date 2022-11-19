@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digitizeit.Quartz.HostedService", "Digitizeit.Quartz.HostedService\Digitizeit.Quartz.HostedService.csproj", "{EC4C785A-F2EA-4E64-A744-9614A2E0B6B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digitizeit.Quartz.HostedService", "Digitizeit.Quartz.HostedService\Digitizeit.Quartz.HostedService.csproj", "{EC4C785A-F2EA-4E64-A744-9614A2E0B6B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digitizeit.Quartz.HostedService.Test", "Digitizeit.Quartz.HostedService.Test\Digitizeit.Quartz.HostedService.Test.csproj", "{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digitizeit.Quartz.HostedService.Test", "Digitizeit.Quartz.HostedService.Test\Digitizeit.Quartz.HostedService.Test.csproj", "{952BA9D0-6B2E-4D17-8919-17313C8EBEE7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{960EC8D3-71C7-4A4C-B5EC-0DE351437009}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostedServiceImplementation", "..\..\Example\HostedServiceImplementation\HostedServiceImplementation.csproj", "{7A36656A-A59C-45BB-AE96-54FAE5A3F34B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostedServiceImplementation", "..\..\Example\HostedServiceImplementation\HostedServiceImplementation.csproj", "{7A36656A-A59C-45BB-AE96-54FAE5A3F34B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartz", "..\..\..\..\external\quartznet\src\Quartz\Quartz.csproj", "{51D3FDAE-9213-432D-ACED-B9275D702095}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{7A36656A-A59C-45BB-AE96-54FAE5A3F34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A36656A-A59C-45BB-AE96-54FAE5A3F34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A36656A-A59C-45BB-AE96-54FAE5A3F34B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51D3FDAE-9213-432D-ACED-B9275D702095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51D3FDAE-9213-432D-ACED-B9275D702095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51D3FDAE-9213-432D-ACED-B9275D702095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51D3FDAE-9213-432D-ACED-B9275D702095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

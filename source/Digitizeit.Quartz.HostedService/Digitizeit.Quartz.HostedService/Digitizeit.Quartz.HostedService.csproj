@@ -14,6 +14,8 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>DotnetCore; Quartz; Digitizeit;Service;Schedule;</PackageTags>
     <Nullable>enable</Nullable>
+    <IncludeSymbols>False</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
